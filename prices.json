@@ -1,0 +1,26 @@
+[
+ {
+  "name":"Lidl",
+  "price":0.99
+ },
+ {
+  "name":"Aldi",
+  "price":0.89
+ },
+ {
+  "name":"Rewe",
+  "price":1.79
+ },
+ {
+  "name":"Kaufland",
+  "price":0.88
+ },
+ {
+  "name":"Netto",
+  "price":1.29
+ },
+ {
+  "name":"Edeka",
+  "price":1.79
+ }
+]
