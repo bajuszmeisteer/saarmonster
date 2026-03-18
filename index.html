@@ -15,6 +15,10 @@ body{
 
 h1{
   color:#3ddc00;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
 }
 
 table{
@@ -41,12 +45,21 @@ th{
 .normal{
   color:#aaa;
 }
+
+.cheapest{
+  color:#ffd700;
+  font-weight:bold;
+  margin-top:20px;
+}
 </style>
 </head>
 
 <body>
 
-<h1>SaarMonster</h1>
+<h1>
+  <img src="monster.png" height="40" alt="Monster Logo">
+  SaarMonster
+</h1>
 <p>Monster Energy 500ml – Any Flavor</p>
 
 <table id="priceTable">
@@ -57,11 +70,14 @@ th{
 </tr>
 </table>
 
+<p class="cheapest" id="cheapestStore"></p>
+
 <script>
 fetch("prices.json")
 .then(r=>r.json())
 .then(data=>{
   const table=document.getElementById("priceTable")
+  let cheapest = data[0]
 
   data.forEach(store=>{
     const row=table.insertRow()
@@ -76,7 +92,15 @@ fetch("prices.json")
       status.innerText="Normal"
       status.className="normal"
     }
+
+    // Find cheapest store
+    if(store.price < cheapest.price){
+      cheapest = store
+    }
   })
+
+  document.getElementById("cheapestStore").innerText =
+    `🏆 Cheapest this week: ${cheapest.name} – €${cheapest.price.toFixed(2)}`
 })
 </script>
 
