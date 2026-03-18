@@ -2,51 +2,52 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SaarMonster – Monster Energy Prices</title>
+<title>SaarMonster</title>
 
 <style>
 body{
-font-family:Arial;
-background:#0f0f0f;
-color:white;
-text-align:center;
-padding:40px;
+  font-family:Arial, sans-serif;
+  background:#0f0f0f;
+  color:white;
+  text-align:center;
+  padding:40px;
 }
 
 h1{
-color:#3ddc00;
+  color:#3ddc00;
 }
 
 table{
-margin:auto;
-border-collapse:collapse;
-width:420px;
+  margin:auto;
+  border-collapse:collapse;
+  width:90%;
+  max-width:500px;
 }
 
 th,td{
-padding:12px;
-border:1px solid #333;
+  padding:12px;
+  border:1px solid #333;
 }
 
 th{
-background:#1b1b1b;
+  background:#1b1b1b;
 }
 
 .sale{
-color:#3ddc00;
-font-weight:bold;
+  color:#3ddc00;
+  font-weight:bold;
 }
 
 .normal{
-color:#aaa;
+  color:#aaa;
 }
 </style>
 </head>
 
 <body>
 
-<h1>Monster Energy Prices – Saarbrücken</h1>
-<p>500ml – Any Flavor</p>
+<h1>SaarMonster</h1>
+<p>Monster Energy 500ml – Any Flavor</p>
 
 <table id="priceTable">
 <tr>
@@ -60,30 +61,24 @@ color:#aaa;
 fetch("prices.json")
 .then(r=>r.json())
 .then(data=>{
+  const table=document.getElementById("priceTable")
 
-const table=document.getElementById("priceTable")
+  data.forEach(store=>{
+    const row=table.insertRow()
+    row.insertCell(0).innerText=store.name
+    row.insertCell(1).innerText=store.price.toFixed(2)
 
-data.forEach(store=>{
-
-let row=table.insertRow()
-
-row.insertCell(0).innerText=store.name
-row.insertCell(1).innerText=store.price
-
-let status=row.insertCell(2)
-
-if(store.price<=1){
-status.innerHTML="🔥 SALE"
-status.className="sale"
-}else{
-status.innerText="Normal"
-status.className="normal"
-}
-
-})
-
+    const status=row.insertCell(2)
+    if(store.price<=1){
+      status.innerHTML="🔥 SALE"
+      status.className="sale"
+    }else{
+      status.innerText="Normal"
+      status.className="normal"
+    }
+  })
 })
 </script>
 
 </body>
-</html> 
+</html>
